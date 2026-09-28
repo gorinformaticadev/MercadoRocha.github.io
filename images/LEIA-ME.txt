@@ -1,0 +1,40 @@
+# Imagens — Mercado Rocha
+
+Coloque os arquivos **com estes nomes exatos** dentro das pastas ao lado.
+Se a imagem não existir, a página mostra um aviso/emoji no lugar (sem quebrar).
+
+```
+images/
+├── logo.png            -> logo quadrada ou horizontal (PNG transparente, ~400x400)
+├── fachada.jpg         -> foto da loja/prédio (800x600 ou maior)
+└── produtos/
+    ├── banana.png      -> 260x260, fundo transparente de preferência
+    ├── picanha.png
+    ├── leite.png
+    ├── pao.png
+    ├── ovos.png
+    └── laranja.png
+```
+
+## Como trocar
+
+1. Copie o arquivo para a pasta indicada **com o mesmo nome**.
+   Se quiser usar outro nome (ex.: `logo-novo.png`), abra o `index.html`
+   e altere o `src` da tag desejada.
+2. Atualize a página (`Ctrl + F5`).
+
+## Tamanhos recomendados
+
+| Uso          | Formato | Tamanho  |
+|--------------|---------|----------|
+| Logo         | PNG     | 400x400  |
+| Fachada      | JPG     | 1200x900 |
+| Produtos     | PNG     | 400x400  |
+
+## Se preferir usar links externos
+
+Você pode trocar direto o `src` pela URL, por exemplo:
+
+```html
+<img src="https://meusite.com.br/img/logo.png" alt="Logo do Mercado Rocha">
+```

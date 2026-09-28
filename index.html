@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mercado Rocha — Fresh Market da sua família</title>
+<meta name="description" content="Mercado Rocha: mercado de bairro com produits frescos, quentes opções e preços justos. Peça já pelo WhatsApp.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="container topbar__inner">
+    <span>📞 (11) 4002-8922</span>
+    <span class="topbar__hide">🕗 Seg a Sáb, 7h às 22h</span>
+    <span class="topbar__hide">📍 Av. das Palmeiras, 1200 — Centro</span>
+  </div>
+</header>
+
+<header class="header" id="header">
+  <div class="container header__inner">
+    <a href="#top" class="logo">
+      <!-- Troque pelo logo real -->
+      <span class="logo__mark">MR</span>
+      <span class="logo__text">Mercado<strong>Rocha</strong></span>
+    </a>
+
+    <nav class="nav" id="nav">
+      <a href="#inicio">Início</a>
+      <a href="#departamentos">Departamentos</a>
+      <a href="#ofertas">Ofertas</a>
+      <a href="#sobre">Sobre</a>
+      <a href="#contato">Contato</a>
+      <a href="#contato" class="btn btn--primary btn--sm nav__cta">Peça pelo WhatsApp</a>
+    </nav>
+
+    <button class="burger" id="burger" aria-label="Abrir menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero" id="inicio">
+    <div class="container hero__inner">
+      <div class="hero__content">
+        <span class="badge">🥬 Frescos todos os dias</span>
+        <h1>Do seu jeito, do seu bairro, <em>com preço justo</em>.</h1>
+        <p>Mercado completo com foco em produtos frescos, ambiente familiar e entrega rápida em todo o bairro. Peça pelo WhatsApp e receba em casa.</p>
+        <div class="hero__actions">
+          <a href="#ofertas" class="btn btn--primary">Ver ofertas da semana</a>
+          <a href="#contato" class="btn btn--ghost">Onde estamos</a>
+        </div>
+        <ul class="hero__stats">
+          <li><strong>25+</strong><span>anos no bairro</span></li>
+          <li><strong>8.000+</strong><span>produtos</span></li>
+          <li><strong>30min</strong><span>de entrega</span></li>
+        </ul>
+      </div>
+      <div class="hero__media">
+        <!-- IMAGEM 1 — substitua images/logo.png pela logo do mercado -->
+        <div class="logo-box">
+          <img src="images/logo.png" alt="Logo do Mercado Rocha" loading="eager" width="420" height="420">
+          <small>Substitua: <code>images/logo.png</code></small>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features">
+    <div class="container features__grid">
+      <article class="card">
+        <div class="card__icon">🛒</div>
+        <h3>Compra fácil</h3>
+        <p>Pedido pelo WhatsApp, retirada ou delivery no seu endereço.</p>
+      </article>
+      <article class="card">
+        <div class="card__icon">🥩</div>
+        <h3>Açougue no ponto</h3>
+        <p>Corte na sua preferência, feito na hora, com origem garantida.</p>
+      </article>
+      <article class="card">
+        <div class="card__icon">💳</div>
+        <h3>Pagamento flexível</h3>
+        <p>Pix, débito, crédito em até 6x, dinheiro e vale-compras.</p>
+      </article>
+      <article class="card">
+        <div class="card__icon">🛵</div>
+        <h3>Entrega rápida</h3>
+        <p>Motoboy próprio em um raio de 6 km, todos os dias.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section" id="departamentos">
+    <div class="container">
+      <header class="section__head">
+        <h2>Departamentos</h2>
+        <p>Tudo o que a sua casa precisa, em um só lugar.</p>
+      </header>
+      <div class="dept-grid">
+        <a class="dept" href="#"><span>🥬</span> Hortifrúti</a>
+        <a class="dept" href="#"><span>🥩</span> Açougue</a>
+        <a class="dept" href="#"><span>🐟</span> Peixaria</a>
+        <a class="dept" href="#"><span>🧀</span> Mercearia</a>
+        <a class="dept" href="#"><span>🍞</span> Padaria</a>
+        <a class="dept" href="#"><span>🧊</span> Congelados</a>
+        <a class="dept" href="#"><span>🍺</span> Bebidas</a>
+        <a class="dept" href="#"><span>🧴</span> Limpeza</a>
+        <a class="dept" href="#"><span>👶</span> Infantil</a>
+        <a class="dept" href="#"><span>🐾</span> Pet</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt" id="ofertas">
+    <div class="container">
+      <header class="section__head">
+        <h2>Ofertas da semana</h2>
+        <p>Preços atualizados toda quarta-feira. Enquanto durarem os estoques.</p>
+      </header>
+      <div class="prod-grid" id="prodGrid">
+        <article class="prod">
+          <span class="prod__tag">-25%</span>
+          <div class="prod__img"><img src="images/produtos/banana.png" alt="Banana prata" loading="lazy" width="260" height="260"></div>
+          <h3>Banana prata</h3>
+          <p class="prod__unit">kg</p>
+          <div class="prod__price"><span class="prod__old">R$ 7,99</span> R$ 5,99</div>
+        </article>
+        <article class="prod">
+          <span class="prod__tag">-18%</span>
+          <div class="prod__img"><img src="images/produtos/picanha.png" alt="Picanha" loading="lazy" width="260" height="260"></div>
+          <h3>Picanha</h3>
+          <p class="prod__unit">kg</p>
+          <div class="prod__price"><span class="prod__old">R$ 89,90</span> R$ 73,90</div>
+        </article>
+        <article class="prod">
+          <span class="prod__tag">-30%</span>
+          <div class="prod__img"><img src="images/produtos/leite.png" alt="Leite integral" loading="lazy" width="260" height="260"></div>
+          <h3>Leite integral</h3>
+          <p class="prod__unit">1 L</p>
+          <div class="prod__price"><span class="prod__old">R$ 6,49</span> R$ 4,54</div>
+        </article>
+        <article class="prod">
+          <span class="prod__tag">-22%</span>
+          <div class="prod__img"><img src="images/produtos/pao.png" alt="Pão francês" loading="lazy" width="260" height="260"></div>
+          <h3>Pão francês</h3>
+          <p class="prod__unit">500 g</p>
+          <div class="prod__price"><span class="prod__old">R$ 8,00</span> R$ 6,24</div>
+        </article>
+        <article class="prod">
+          <span class="prod__tag">-15%</span>
+          <div class="prod__img"><img src="images/produtos/ovos.png" alt="Ovos" loading="lazy" width="260" height="260"></div>
+          <h3>Ovos</h3>
+          <p class="prod__unit">cartela c/ 30</p>
+          <div class="prod__price"><span class="prod__old">R$ 24,90</span> R$ 21,16</div>
+        </article>
+        <article class="prod">
+          <span class="prod__tag">-40%</span>
+          <div class="prod__img"><img src="images/produtos/laranja.png" alt="Laranja pera" loading="lazy" width="260" height="260"></div>
+          <h3>Laranja pera</h3>
+          <p class="prod__unit">kg</p>
+          <div class="prod__price"><span class="prod__old">R$ 5,50</span> R$ 3,29</div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="sobre">
+    <div class="container sobre">
+      <div class="sobre__media">
+        <!-- IMAGEM 2 — substitua images/fachada.jpg pela foto do mercado -->
+        <div class="photo-box">
+          <img src="images/fachada.jpg" alt="Fachada do Mercado Rocha" loading="lazy" width="800" height="600">
+          <small>Substitua: <code>images/fachada.jpg</code></small>
+        </div>
+      </div>
+      <div class="sobre__text">
+        <span class="badge badge--light">Desde 1999</span>
+        <h2>Feito para o bairro, não só para vender</h2>
+        <p>O Mercado Rocha nasceu como uma mercearia de esquina e virou referência para mais de 4 mil famílias. Hoje somos um mercado completo, mas com a mesma proximidade de sempre: funcionário que conhece o cliente pelo nome, gôndola bem cuidada e produto fresco chegando toda manhã.</p>
+        <ul class="check-list">
+          <li>Frutas, verduras e hortaliças checadas no dia</li>
+          <li>Peixaria e açougue com origem e inspeção</li>
+          <li>Marca própria com até 30% de economia</li>
+          <li>Reciclagem e separação de resíduos na loja</li>
+        </ul>
+        <a href="#contato" class="btn btn--primary">Fale com a gente</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt" id="contato">
+    <div class="container">
+      <header class="section__head">
+        <h2>Contato e localização</h2>
+        <p>Estamos te esperando — ou vamos até você.</p>
+      </header>
+
+      <div class="contato">
+        <div class="contato__info">
+          <div class="info">
+            <span class="info__icon">📍</span>
+            <div>
+              <h4>Endereço</h4>
+              <p>Av. das Palmeiras, 1200 — Centro<br>São Paulo — SP, 01000-000</p>
+            </div>
+          </div>
+          <div class="info">
+            <span class="info__icon">📞</span>
+            <div>
+              <h4>Telefone / WhatsApp</h4>
+              <p>(11) 4002-8922<br>(11) 98888-1234</p>
+            </div>
+          </div>
+          <div class="info">
+            <span class="info__icon">✉️</span>
+            <div>
+              <h4>E-mail</h4>
+              <p>contato@mercadorocha.com.br<br>rh@mercadorocha.com.br (trabalhe conosco)</p>
+            </div>
+          </div>
+          <div class="info">
+            <span class="info__icon">🕗</span>
+            <div>
+              <h4>Horário</h4>
+              <p>Seg a Sex: 7h às 22h<br>Sábado: 7h às 21h · Domingo: 8h às 13h</p>
+            </div>
+          </div>
+          <div class="info">
+            <span class="info__icon">🚚</span>
+            <div>
+              <h4>Entrega</h4>
+              <p>Frete grátis acima de R$ 150 em um raio de 6 km.</p>
+            </div>
+          </div>
+        </div>
+
+        <form class="contato__form" id="contatoForm" novalidate>
+          <div class="field">
+            <input type="text" id="nome" name="nome" placeholder="Seu nome" required>
+          </div>
+          <div class="field">
+            <input type="email" id="email" name="email" placeholder="Seu e-mail" required>
+          </div>
+          <div class="field">
+            <input type="tel" id="tel" name="tel" placeholder="WhatsApp (11) 90000-0000" required>
+          </div>
+          <div class="field">
+            <select id="assunto" name="assunto">
+              <option>Quero fazer um pedido</option>
+              <option>Dúvida sobre entrega</option>
+              <option>Vaga de emprego</option>
+              <option>Parcerias e fornecedores</option>
+              <option>Outro assunto</option>
+            </select>
+          </div>
+          <div class="field">
+            <textarea id="msg" name="msg" rows="4" placeholder="Escreva sua mensagem"></textarea>
+          </div>
+          <button type="submit" class="btn btn--primary btn--block">Enviar mensagem</button>
+          <p class="form-status" id="formStatus" role="status"></p>
+        </form>
+      </div>
+
+      <div class="mapa">
+        <iframe
+          title="Mapa — Mercado Rocha"
+          src="https://www.openstreetmap.org/export/embed.html?bbox=-46.68%2C-23.58%2C-46.63%2C-23.55&amp;layer=mapnik"
+          loading="lazy"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="container cta__inner">
+      <h2>Peça agora e receba em até 30 minutos</h2>
+      <a href="https://wa.me/5511998881234" class="btn btn--white" target="_blank" rel="noopener">Chamar no WhatsApp</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="container footer__grid">
+    <div>
+      <a href="#top" class="logo logo--footer">
+        <span class="logo__mark">MR</span>
+        <span class="logo__text">Mercado<strong>Rocha</strong></span>
+      </a>
+      <p class="footer__desc">O mercado do bairro que cuida de tudo para a sua casa.</p>
+    </div>
+    <div>
+      <h4>Navegação</h4>
+      <ul>
+        <li><a href="#inicio">Início</a></li>
+        <li><a href="#departamentos">Departamentos</a></li>
+        <li><a href="#ofertas">Ofertas</a></li>
+        <li><a href="#sobre">Sobre nós</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Departamentos</h4>
+      <ul>
+        <li>Hortifrúti e mercearia</li>
+        <li>Açougue e peixaria</li>
+        <li>Padaria e congelados</li>
+        <li>Bebidas e limpeza</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Contato</h4>
+      <ul>
+        <li>Av. das Palmeiras, 1200 — Centro</li>
+        <li>(11) 4002-8922</li>
+        <li>contato@mercadorocha.com.br</li>
+        <li>Seg a Sáb: 7h às 22h</li>
+      </ul>
+    </div>
+  </div>
+  <div class="container footer__bottom">
+    <small>© <span id="ano"></span> Mercado Rocha. Todos os direitos reservados.</small>
+    <small>CNPJ 00.000.000/0001-00</small>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
