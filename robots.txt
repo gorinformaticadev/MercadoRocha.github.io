@@ -1,0 +1,7 @@
+# robots.txt — Mercado Rocha
+# TROQUE https://mercadorocha.pluggor.com.br pelo dominio real do site
+
+User-agent: *
+Allow: /
+
+Sitemap: https://mercadorocha.pluggor.com.br/sitemap.xml

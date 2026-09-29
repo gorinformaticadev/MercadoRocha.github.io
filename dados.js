@@ -31,16 +31,31 @@ var MERCADO = {
     // WhatsApp: SOMENTE numeros, com codigo do pais e sem o sinal de +
     whatsapp: '556134599937',
 
-    email: 'contato@mercadorocha.com.br',
-    emailCurriculo: 'rh@mercadorocha.com.br',
+    email: 'mercadorocha2016@outlook.com',
 
     instagram: 'https://www.instagram.com/gorinformatica/',
     instagramNome: '@gorinformatica',
     facebook: 'https://www.facebook.com/mercadorocha',
     facebookNome: 'Facebook',
 
-    // Link para gerar o mapa: https://www.openstreetmap.org/export/embed.html?bbox=<LON_ESQ>%2C<LAT_SUL>%2C<LON_DIR>%2C<LAT_NOR>&layer=mapnik
-    mapa: 'https://www.openstreetmap.org/export/embed.html?bbox=-47.95%2C-15.83%2C-47.88%2C-15.77&layer=mapnik'
+    // Link da ficha no Google Maps (botao "Compartilhar" do Google Meu Negocio)
+    linkMapa: 'https://maps.app.goo.gl/mNUVmepgo9zAkCR89',
+    // Link direto para as avaliações (Google Maps não aceita /reviews no link curto)
+    linkMapaAvaliacoes: 'https://www.google.com/maps/place/Supermercado+Rocha/@-15.9468269,-48.2316314,17z/data=!3m1!4b1!4m6!3m5!1s0x935bd0852be6550b:0x5484ecb140f1faad!8m2!3d-15.9468269!4d-48.2316314!16s%2Fg%2F11c6v92vbc',
+    placeId: '0x935bd0852be6550b:0x5484ecb140f1faad',
+
+    // Mapa exibido no site. Este formato NAO precisa de chave de API.
+    // Coordenadas exatas da ficha: -15.9468269, -48.2316314
+    mapa: 'https://maps.google.com/maps?q=Supermercado+Rocha+%40-15.9468269,-48.2316314&z=16&hl=pt-BR&output=embed'
+
+    /*
+      OPCIONAL - Embed API oficial do Google (dá mais controle e nao
+      mostra o botao "Ver no Google Maps" dentro do mapa), mas exige
+      uma chave com a Maps Embed API habilitada:
+        https://www.google.com/maps/embed/v1/place?key=SUA_CHAVE&q=place_id:PLACE_ID
+      O place_id curto da ficha voce encontra em:
+        https://www.google.com/maps/place/SEU-LINKS>...  (ultimo bloco da URL)
+    */
   },
 
   /* ---------- Horario ---------- */
@@ -62,13 +77,52 @@ var MERCADO = {
     raio: '6 km'
   },*/
 
+  /* ---------- Departamentos ----------
+     Aparecem na grade do site. Ao clicar, abre o WhatsApp perguntando
+     das ofertas daquele departamento. Para apontar para outra pagina,
+     troque o campo `link` (ex.: link: 'https://.../hortifruti.html').
+     Para adicionar ou remover, copie/apague um bloco.            */
+  departamentos: [
+    { icone: '🥬', nome: 'Hortifrúti' },
+    { icone: '🥩', nome: 'Itens de Açougue' },
+    { icone: '🐟', nome: 'Peixes' },
+    { icone: '🧀', nome: 'Mercearia' },
+    { icone: '🍞', nome: 'Padaria' },
+    { icone: '🧊', nome: 'Congelados' },
+    { icone: '🍺', nome: 'Bebidas' },
+    { icone: '🧴', nome: 'Limpeza' },
+    { icone: '🧼', nome: 'Higiene' },
+    { icone: '🐾', nome: 'Pet' }
+  ],
+
+  /* ---------- SEO ----------
+     IMPORTANTE: o titulo e a descricao abaixo sao uma COPIA do que
+     esta escrito no <head> do index.html, para que os buscadores leiam
+     o texto CERTO mesmo sem executar JavaScript. Quando alterar aqui,
+     altere tambem no index.html (busque por <title> e
+     <meta name="description">).                                      */
+  seo: {
+    titulo: 'Mercado Rocha | Supermercado em Água Quente, Brasília-DF',
+    descricao: 'Supermercado em Água Quente, Brasília-DF. Hortifrúti, açougue, peixaria, padaria e mercearia com preço justo. Peça pelo WhatsApp e receba em 30 minutos.',
+    palavrasChave: 'supermercado Brasília, mercado Água Quente, hortifrúti, açougue, peixaria, mercearia, padaria, congelados, bebidas, entrega em Brasília'
+  },
+
   /* ---------- Imagens ----------
      Aceita caminho local (images/logo.png) ou link do Drive/Dropbox.
      Google Drive: https://drive.google.com/thumbnail?id=ID_DO_ARQUIVO&sz=w800
      Dropbox:      https://www.dropbox.com/s/ID/arquivo.jpg?raw=1            */
   imagens: {
+    // Logo: aparece no cabecalho e no rodape, no lugar do antigo "MR"
     logo: 'images/logo.png',
-    fachada: 'images/fachada.jpg'
+
+    // Foto principal do topo: ocupa toda a area. Formato retrato (4:5)
+    destaque: 'images/destaque.jpg',
+
+    // Foto da loja na secao "Sobre"
+    fachada: 'images/fachada.jpg',
+
+    // Icone da aba do navegador
+    favicon: 'images/favicon.png'
   },
 
   /* ---------- Ofertas da semana ----------
@@ -92,7 +146,7 @@ var MERCADO = {
      Formato recomendado: imagem QUADRADA (1:1), 1000x1000 px.       */
   ofertas: [
     {
-      imagem: 'images/ofertas/banana.png',
+      imagem: 'images/ofertas/promo1.png',
       nome: 'Oferta: banana prata, quilo por R$ 5,99'
     },
     {

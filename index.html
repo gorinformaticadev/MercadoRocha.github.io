@@ -3,12 +3,102 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mercado Rocha — Fresh Market da sua família</title>
-<meta name="description" content="Mercado Rocha: mercado de bairro com produtos frescos, boas opções e preços justos. Peça já pelo WhatsApp.">
+
+<!--
+  SEO — titulo e descricao abaixo sao a versao ESTATICA (garante que
+  qualquer buscador leia, mesmo sem executar JavaScript).
+  Depois de editar, mantenha o mesmo texto em dados.js > seo.
+-->
+<title>Mercado Rocha | Supermercado em Água Quente, Brasília-DF</title>
+<meta name="description" content="Supermercado em Água Quente, Brasília-DF. Hortifrúti, açougue, peixaria, padaria e mercearia com preço justo. Peça pelo WhatsApp e receba em 30 minutos.">
+<link rel="canonical" href="https://mercadorocha.pluggor.com.br/">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<meta name="author" content="Mercado Rocha">
+
+<!-- SEO local (Busca Local / Google Maps) -->
+<meta name="geo.region" content="BR-DF">
+<meta name="geo.placename" content="Água Quente, Brasília">
+<meta name="ICBM" content="-48.2316314, -15.9468269">
+<meta name="keywords" content="supermercado Brasília, mercado Água Quente, hortifrúti, açougue, peixaria, mercearia, padaria, congelados, bebidas, entrega em Brasília">
+
+<!-- Open Graph / Facebook e WhatsApp -->
+<meta property="og:type" content="business.business">
+<meta property="og:site_name" content="Mercado Rocha">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Mercado Rocha | Supermercado em Água Quente, Brasília-DF">
+<meta property="og:description" content="Hortifrúti, açougue, peixaria, padaria e mercearia com preço justo. Peça pelo WhatsApp e receba em 30 minutos.">
+<meta property="og:url" content="https://mercadorocha.pluggor.com.br/">
+<meta property="og:image" content="https://mercadorocha.pluggor.com.br/images/destaque.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="1500">
+<meta property="og:image:alt" content="Fachada e interior do Mercado Rocha">
+<meta property="business:contact:phone" content="+55-61-3459-9937">
+<meta property="business:contact:email" content="contato@mercadorocha.com.br">
+<meta property="business:location:latitude" content="-15.9468269">
+<meta property="business:location:longitude" content="-48.2316314">
+
+<!-- Twitter / X -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Mercado Rocha | Supermercado em Brasília-DF">
+<meta name="twitter:description" content="Hortifrúti, açougue, peixaria, padaria e mercearia com preço justo. Peça pelo WhatsApp.">
+<meta name="twitter:image" content="https://mercadorocha.pluggor.com.br/images/destaque.jpg">
+
+<link rel="alternate" hreflang="pt-BR" href="https://mercadorocha.pluggor.com.br/">
+<link rel="sitemap" type="application/xml" title="Sitemap" href="sitemap.xml">
+
+<!-- Desempenho: conexao e fonte carregam antes da tela pintar -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="image" href="images/destaque.jpg" fetchpriority="high">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<meta name="theme-color" content="#14803c">
+
+<!-- Dados estruturados para o Google (Rich Results / SEO local) -->
+<script type="application/ld+json" id="jsonLd">
+{
+  "@context": "https://schema.org",
+  "@type": "GroceryStore",
+  "name": "Mercado Rocha",
+  "description": "Supermercado de bairro com hortifrúti, açougue, peixaria, padaria, mercearia, congelados e bebidas. Entrega rápida em Brasília-DF.",
+  "url": "https://mercadorocha.pluggor.com.br/",
+  "image": "https://mercadorocha.pluggor.com.br/images/destaque.jpg",
+  "logo": "https://mercadorocha.pluggor.com.br/images/logo.png",
+  "telephone": "+55-61-3459-9937",
+  "email": "contato@mercadorocha.com.br",
+  "priceRange": "$$",
+  "currenciesAccepted": "BRL",
+  "paymentAccepted": "Pix, Débito, Crédito, Dinheiro, Vale-compras",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Cond. Residêncial Buriti, Q 1, Área Especial, loja 13",
+    "addressLocality": "Água Quente",
+    "addressRegion": "DF",
+    "postalCode": "72669-300",
+    "addressCountry": "BR"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": -15.9468269,
+    "longitude": -48.2316314
+  },
+  "hasMap": "https://maps.app.goo.gl/mNUVmepgo9zAkCR89",
+  "openingHoursSpecification": [
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "07:00", "closes": "21:00" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "07:00", "closes": "21:00" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "08:00", "closes": "14:00" }
+  ],
+  "areaServed": [
+    { "@type": "City", "name": "Brasília" },
+    { "@type": "Place", "name": "Água Quente" }
+  ],
+  "sameAs": ["https://www.instagram.com/gorinformatica/"]
+}
+</script>
+
+<link rel="icon" type="image/png" data-cfg-href="imagens.favicon" href="images/favicon.png">
+<link rel="apple-touch-icon" data-cfg-href="imagens.favicon" href="images/favicon.png">
 </head>
 <body>
 
@@ -23,7 +113,9 @@
 <header class="header" id="header">
   <div class="container header__inner">
     <a href="#top" class="logo">
-      <span class="logo__mark" data-cfg="sigla">MR</span>
+      <span class="logo__mark">
+        <img data-cfg-src="imagens.logo" data-cfg-alt="nome" alt="Mercado Rocha" width="1459" height="1078">
+      </span>
       <span class="logo__text"><span data-cfg="nomeParte1">Mercado</span><strong data-cfg="nomeParte2">Rocha</strong></span>
     </a>
 
@@ -57,9 +149,9 @@
         
       </div>
       <div class="hero__media">
-        <!-- Logo: troque o caminho em dados.js > imagens.logo -->
-        <div class="logo-box">
-          <img data-cfg-src="imagens.logo" data-cfg-alt="nome" alt="Logo do Mercado Rocha" loading="eager" width="420" height="420">
+        <!-- Foto principal: troque em dados.js > imagens.destaque -->
+        <div class="destaque">
+          <img data-cfg-src="imagens.destaque" data-cfg-alt="nome" alt="Mercado Rocha" width="1200" height="1500">
         </div>
       </div>
     </div>
@@ -74,7 +166,7 @@
       </article>
       <article class="card">
         <div class="card__icon">🥩</div>
-        <h3>Itens de açugue congelados</h3>
+        <h3>Itens de açougue congelados</h3>
         <p>Cortes selecionados, congelados e de procedência garantida, preservando a qualidade, o sabor e a praticidade.</p>
       </article>
       <article class="card">
@@ -91,18 +183,8 @@
         <h2>Departamentos</h2>
         <p>Tudo o que a sua casa precisa, em um só lugar.</p>
       </header>
-      <div class="dept-grid">
-        <a class="dept" href="#"><span>🥬</span> Hortifrúti</a>
-        <a class="dept" href="#"><span>🥩</span> Itens de Açougue</a>
-        <a class="dept" href="#"><span>🐟</span> Peixes</a>
-        <a class="dept" href="#"><span>🧀</span> Mercearia</a>
-        <a class="dept" href="#"><span>🍞</span> Padaria</a>
-        <a class="dept" href="#"><span>🧊</span> Congelados</a>
-        <a class="dept" href="#"><span>🍺</span> Bebidas</a>
-        <a class="dept" href="#"><span>🧴</span> Limpeza</a>
-        <a class="dept" href="#"><span>🧼</span> Higiene</a>
-        <a class="dept" href="#"><span>🐾</span> Pet</a>
-      </div>
+      <!-- Os itens sao gerados a partir de dados.js > departamentos -->
+      <div class="dept-grid" id="deptGrid"></div>
     </div>
   </section>
 
@@ -172,7 +254,6 @@
             <div>
               <h4>E-mail</h4>
               <p><a data-cfg-href="contato.emailLink" data-cfg="contato.email">contato@mercadorocha.com.br</a><br>
-              <a data-cfg-href="contato.emailCurriculoLink" data-cfg="contato.emailCurriculo">rh@mercadorocha.com.br</a> (trabalhe conosco)</p>
             </div>
           </div>
           <div class="info">
@@ -225,8 +306,14 @@
         <iframe
           title="Mapa — Mercado Rocha"
           data-cfg-src="contato.mapa"
-          src="https://www.openstreetmap.org/export/embed.html?bbox=-47.95%2C-15.83%2C-47.88%2C-15.77&amp;layer=mapnik"
-          loading="lazy"></iframe>
+          src="https://maps.google.com/maps?q=Supermercado+Rocha&amp;z=16&amp;output=embed"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          allowfullscreen></iframe>
+        <div class="mapa__acoes">
+          <a data-cfg-href="contato.linkMapa" class="btn btn--ghost btn--sm" target="_blank" rel="noopener">Ver ficha no Google Maps</a>
+          <a data-cfg-href="contato.linkMapaAvaliacoes" class="btn btn--ghost btn--sm" target="_blank" rel="noopener">Ver avaliações</a>
+        </div>
       </div>
     </div>
   </section>
@@ -238,7 +325,9 @@
   <div class="container footer__grid">
     <div>
       <a href="#top" class="logo logo--footer">
-        <span class="logo__mark" data-cfg="sigla">MR</span>
+        <span class="logo__mark">
+          <img data-cfg-src="imagens.logo" data-cfg-alt="nome" alt="Mercado Rocha" width="1459" height="1078">
+        </span>
         <span class="logo__text"><span data-cfg="nomeParte1">Mercado</span><strong data-cfg="nomeParte2">Rocha</strong></span>
       </a>
       <p class="footer__desc">O mercado do bairro que cuida de tudo para a sua casa.</p>

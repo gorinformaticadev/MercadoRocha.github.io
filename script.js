@@ -29,11 +29,30 @@
     if (D.contato.email) D.contato.emailLink = 'mailto:' + D.contato.email;
     if (D.contato.emailCurriculo) D.contato.emailCurriculoLink = 'mailto:' + D.contato.emailCurriculo;
     if (D.contato.whatsapp) D.contato.linkWhatsapp = 'https://wa.me/' + D.contato.whatsapp;
+    if (D.contato.linkMapaAvaliacoes) {
+      // já vem pronto no dados.js
+    } else if (D.contato.linkMapa) {
+      D.contato.linkMapaAvaliacoes = D.contato.linkMapa.replace(/\?.*$/, '') + '/reviews';
+    }
     if (D.contato.endereco) {
       D.contato.enderecoLinha1 = String(D.contato.endereco).split('\n').pop();
     }
   }
   if (D.nomeParte1) D.nome = (D.nomeParte1 + ' ' + (D.nomeParte2 || '')).trim();
+
+  /* Titulo e descricao: o index.html ja traz a versao estatica (que e a
+     que o buscador le com seguranca). Aqui so sincronizamos caso o
+     dados.js mude — e nunca trocamos pelo nome da loja, que perderia
+     as palavras-chave. */
+  if (D.seo && D.seo.titulo) document.title = D.seo.titulo;
+  var metaDesc = document.querySelector('meta[name="description"]');
+  if (metaDesc && D.seo && D.seo.descricao) metaDesc.setAttribute('content', D.seo.descricao);
+  var metaKeywords = document.querySelector('meta[name="keywords"]');
+  if (metaKeywords && D.seo && D.seo.palavrasChave) {
+    metaKeywords.setAttribute('content', D.seo.palavrasChave);
+  }
+  var ano = document.getElementById('ano');
+  if (ano) ano.textContent = new Date().getFullYear();
 
   function valorDe(caminho) {
     var v = buscar(caminho);
@@ -61,14 +80,40 @@
     if (v) el.setAttribute('alt', String(v));
   });
 
-  if (D.nome) document.title = D.nome;
-  var metaDesc = document.querySelector('meta[name="description"]');
-  if (metaDesc && D.descricao) metaDesc.setAttribute('content', D.descricao);
-  var ano = document.getElementById('ano');
-  if (ano) ano.textContent = new Date().getFullYear();
+  /* =========================================================
+     Departamentos: vem do dados.js. Cada item leva ao WhatsApp
+     pedindo as ofertas daquele departamento (ou ao `link` definido).
+     ========================================================= */
+
+  (function departamentos() {
+    var grid = document.getElementById('deptGrid');
+    if (!grid) return;
+    var lista = Array.isArray(D.departamentos) ? D.departamentos : [];
+    var zap = D.contato && D.contato.whatsapp ? D.contato.whatsapp : '';
+
+    lista.forEach(function (dept) {
+      var a = document.createElement('a');
+      a.className = 'dept';
+      a.href = dept.link || ('https://wa.me/' + zap + '?text=' +
+        encodeURIComponent('Olá! Quero saber as ofertas de ' + (dept.nome || '') + '.'));
+      if (dept.link && /^https?:/i.test(dept.link)) {
+        a.target = '_blank';
+        a.rel = 'noopener';
+      }
+      if (dept.icone) {
+        var icone = document.createElement('span');
+        icone.textContent = dept.icone;
+        a.appendChild(icone);
+        a.appendChild(document.createTextNode(' ' + (dept.nome || '')));
+      } else {
+        a.textContent = dept.nome || '';
+      }
+      grid.appendChild(a);
+    });
+  })();
 
   /* =========================================================
-     2. Ofertas: gera os cards e so mostra os que carregarem
+     Ofertas: gera os cards e so mostra os que carregarem
      ========================================================= */
 
   (function ofertas() {
@@ -142,16 +187,20 @@
      3. Imagens de logo e fachada: avisa o caminho se faltar
      ========================================================= */
 
-  Array.prototype.forEach.call(document.querySelectorAll('.logo-box img, .photo-box img'), function (img) {
-    img.addEventListener('error', function () {
-      img.classList.add('is-missing');
-      var ph = document.createElement('span');
-      ph.className = 'logo-box__hint';
-      ph.innerHTML = 'Coloque a imagem em<br><code>' + img.getAttribute('src') + '</code>';
-      img.parentNode.insertBefore(ph, img.parentNode.firstChild);
-    });
-  });
-
+  /* Imagens que podem faltar: mostra o caminho para corrigir. 
+  Array.prototype.forEach.call(
+    document.querySelectorAll('.destaque img, .photo-box img, .logo__mark img'),
+    function (img) {
+      img.addEventListener('error', function () {
+        img.classList.add('is-missing');
+        var ph = document.createElement('span');
+        ph.className = 'img-faltando';
+        ph.innerHTML = 'Coloque a imagem em<br><code>' + img.getAttribute('src') + '</code>';
+        img.parentNode.appendChild(ph);
+      });
+    }
+  );
+*/
   /* =========================================================
      4. Menu, header e formulario
      ========================================================= */
@@ -226,7 +275,7 @@
      ========================================================= */
 
   var revealables = document.querySelectorAll(
-    '.card, .dept, .prod, .info, .contato__form, .logo-box, .photo-box, .hero__stats'
+    '.card, .dept, .prod, .info, .contato__form, .destaque, .photo-box, .hero__stats'
   );
 
   if ('IntersectionObserver' in window) {
