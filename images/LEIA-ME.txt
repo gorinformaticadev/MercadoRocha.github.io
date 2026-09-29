@@ -1,27 +1,58 @@
 # Imagens — Mercado Rocha
 
-Coloque os arquivos **com estes nomes exatos** dentro das pastas ao lado.
-Se a imagem não existir, a página mostra um aviso/emoji no lugar (sem quebrar).
+**As imagens agora sao definidas no arquivo `dados.js`, na raiz do site.**
+Voce nao precisa mais editar o `index.html` para trocar qualquer uma delas.
+
+Abra `dados.js` e edite a secao `imagens`:
+
+```js
+imagens: {
+  logo:    'images/logo.png',
+  fachada: 'images/fachada.jpg'
+}
+```
+
+Os arquivos ficam em `images/`. Se voce quiser usar link externo
+(Google Drive, Dropbox, outro servidor), troque direto pelo link:
+
+```js
+logo:    'https://drive.google.com/thumbnail?id=ID_DO_ARQUIVO&sz=w800',
+fachada: 'https://www.dropbox.com/s/ID/fachada.jpg?raw=1'
+```
+
+## Imagens das ofertas
+
+As ofertas tambem ficam no `dados.js`, em `ofertas`. Cada item usa:
+
+```js
+{
+  nome: 'Banana prata',
+  unidade: 'kg',
+  preco: '5,99',
+  de: '7,99',              // preco antigo (opcional, pode apagar)
+  desconto: '-25%',        // etiqueta (opcional, pode apagar)
+  imagem: 'images/produtos/banana.png'
+}
+```
+
+Um produto so aparece no site se a imagem carregar. Se NENHUMA imagem
+carregar — ou se a lista `ofertas` ficar vazia — a secao inteira
+"Ofertas da semana" desaparece, junto com o link no menu.
+
+## Arquivos originais desta pasta
 
 ```
 images/
 ├── logo.png            -> logo quadrada ou horizontal (PNG transparente, ~400x400)
 ├── fachada.jpg         -> foto da loja/prédio (800x600 ou maior)
 └── produtos/
-    ├── banana.png      -> 260x260, fundo transparente de preferência
+    ├── banana.png      -> 260x260, fundo transparente de preferencia
     ├── picanha.png
     ├── leite.png
     ├── pao.png
     ├── ovos.png
     └── laranja.png
 ```
-
-## Como trocar
-
-1. Copie o arquivo para a pasta indicada **com o mesmo nome**.
-   Se quiser usar outro nome (ex.: `logo-novo.png`), abra o `index.html`
-   e altere o `src` da tag desejada.
-2. Atualize a página (`Ctrl + F5`).
 
 ## Tamanhos recomendados
 
@@ -31,10 +62,7 @@ images/
 | Fachada      | JPG     | 1200x900 |
 | Produtos     | PNG     | 400x400  |
 
-## Se preferir usar links externos
+## Trocando de nome
 
-Você pode trocar direto o `src` pela URL, por exemplo:
-
-```html
-<img src="https://meusite.com.br/img/logo.png" alt="Logo do Mercado Rocha">
-```
+Se quiser usar outro nome de arquivo, basta alterar o caminho em
+`dados.js` — o `index.html` nao precisa ser tocado.

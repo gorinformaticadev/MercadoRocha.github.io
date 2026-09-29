@@ -1,35 +1,164 @@
 (function () {
   'use strict';
 
+  var D = window.MERCADO || {};
+
+  /* =========================================================
+     1. Preenche os campos marcados com data-cfg no HTML
+     ========================================================= */
+
+  function buscar(caminho) {
+    return caminho.split('.').reduce(function (obj, parte) {
+      return obj == null ? undefined : obj[parte];
+    }, D);
+  }
+
+  function textoSeguro(valor) {
+    return String(valor)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .split('\n').join('<br>');
+  }
+
+  /* Links derivados — precisam existir ANTES de preencher o HTML. */
+  if (D.contato) {
+    if (D.contato.telefone) {
+      D.contato.ligar = 'tel:+' + String(D.contato.telefone).replace(/\D/g, '');
+    }
+    if (D.contato.email) D.contato.emailLink = 'mailto:' + D.contato.email;
+    if (D.contato.emailCurriculo) D.contato.emailCurriculoLink = 'mailto:' + D.contato.emailCurriculo;
+    if (D.contato.whatsapp) D.contato.linkWhatsapp = 'https://wa.me/' + D.contato.whatsapp;
+    if (D.contato.endereco) {
+      D.contato.enderecoLinha1 = String(D.contato.endereco).split('\n').pop();
+    }
+  }
+  if (D.nomeParte1) D.nome = (D.nomeParte1 + ' ' + (D.nomeParte2 || '')).trim();
+
+  function valorDe(caminho) {
+    var v = buscar(caminho);
+    if (v === undefined) return null;
+    return Array.isArray(v) ? v.join('\n') : v;
+  }
+
+  Array.prototype.forEach.call(document.querySelectorAll('[data-cfg]'), function (el) {
+    var v = valorDe(el.getAttribute('data-cfg'));
+    if (v !== null) el.innerHTML = textoSeguro(v);
+  });
+
+  Array.prototype.forEach.call(document.querySelectorAll('[data-cfg-href]'), function (el) {
+    var v = valorDe(el.getAttribute('data-cfg-href'));
+    if (v) el.setAttribute('href', v);
+  });
+
+  Array.prototype.forEach.call(document.querySelectorAll('[data-cfg-src]'), function (el) {
+    var v = valorDe(el.getAttribute('data-cfg-src'));
+    if (v) el.setAttribute('src', v);
+  });
+
+  Array.prototype.forEach.call(document.querySelectorAll('[data-cfg-alt]'), function (el) {
+    var v = valorDe(el.getAttribute('data-cfg-alt'));
+    if (v) el.setAttribute('alt', String(v));
+  });
+
+  if (D.nome) document.title = D.nome;
+  var metaDesc = document.querySelector('meta[name="description"]');
+  if (metaDesc && D.descricao) metaDesc.setAttribute('content', D.descricao);
+  var ano = document.getElementById('ano');
+  if (ano) ano.textContent = new Date().getFullYear();
+
+  /* =========================================================
+     2. Ofertas: gera os cards e so mostra os que carregarem
+     ========================================================= */
+
+  (function ofertas() {
+    var grid = document.getElementById('prodGrid');
+    var section = grid && grid.closest('section');
+    if (!grid || !section) return;
+
+    var lista = Array.isArray(D.ofertas) ? D.ofertas : [];
+
+    var removerSecao = function () {
+      section.remove();
+      Array.prototype.slice.call(document.querySelectorAll('a[href="#ofertas"]'))
+        .forEach(function (a) {
+          var alvo = a.hasAttribute('data-oferta-link') ? a.parentNode : a;
+          if (alvo) alvo.remove();
+        });
+    };
+
+    if (!lista.length) return removerSecao();
+
+    var validos = 0;
+    var resolvidos = 0;
+
+    lista.forEach(function (oferta) {
+      var card = document.createElement('article');
+      card.className = 'prod is-pending';
+
+      var img = document.createElement('img');
+      img.className = 'prod__img';
+      img.alt = oferta.nome || 'Oferta';
+      img.width = 600;
+      img.height = 600;
+      if (oferta.imagem) img.src = oferta.imagem;
+
+      if (oferta.link) {
+        var a = document.createElement('a');
+        a.className = 'prod__link';
+        a.href = oferta.link;
+        if (/^https?:/i.test(oferta.link)) {
+          a.target = '_blank';
+          a.rel = 'noopener';
+        }
+        a.appendChild(img);
+        card.appendChild(a);
+      } else {
+        card.appendChild(img);
+      }
+
+      grid.appendChild(card);
+
+      var resolver = function (carregou) {
+        if (carregou) {
+          validos++;
+          card.classList.remove('is-pending');
+        } else {
+          card.classList.add('is-gone');
+        }
+        if (++resolvidos < lista.length) return;
+        if (validos > 0) return;
+        removerSecao();
+      };
+
+      if (!oferta.imagem) return resolver(false);
+      if (img.complete) return resolver(img.naturalWidth > 0);
+      img.addEventListener('load', function () { resolver(true); });
+      img.addEventListener('error', function () { resolver(false); });
+    });
+  })();
+
+  /* =========================================================
+     3. Imagens de logo e fachada: avisa o caminho se faltar
+     ========================================================= */
+
+  Array.prototype.forEach.call(document.querySelectorAll('.logo-box img, .photo-box img'), function (img) {
+    img.addEventListener('error', function () {
+      img.classList.add('is-missing');
+      var ph = document.createElement('span');
+      ph.className = 'logo-box__hint';
+      ph.innerHTML = 'Coloque a imagem em<br><code>' + img.getAttribute('src') + '</code>';
+      img.parentNode.insertBefore(ph, img.parentNode.firstChild);
+    });
+  });
+
+  /* =========================================================
+     4. Menu, header e formulario
+     ========================================================= */
+
   var header = document.getElementById('header');
   var burger = document.getElementById('burger');
   var nav = document.getElementById('nav');
-
-  document.getElementById('ano').textContent = new Date().getFullYear();
-
-  var fallbacks = {
-    'images/produtos/banana.png': '🍌',
-    'images/produtos/picanha.png': '🥩',
-    'images/produtos/leite.png': '🥛',
-    'images/produtos/pao.png': '🍞',
-    'images/produtos/ovos.png': '🥚',
-    'images/produtos/laranja.png': '🍊'
-  };
-  document.querySelectorAll('.logo-box img, .photo-box img, .prod__img img').forEach(function (img) {
-    img.addEventListener('error', function () {
-      var box = img.parentElement;
-      var src = img.getAttribute('src');
-      img.classList.add('is-missing');
-      if (fallbacks[src]) {
-        box.textContent = fallbacks[src];
-        return;
-      }
-      var ph = document.createElement('span');
-      ph.className = 'logo-box__hint';
-      ph.innerHTML = 'Coloque a imagem em<br><code>' + src + '</code>';
-      box.insertBefore(ph, box.firstChild);
-    });
-  });
 
   var onScroll = function () {
     header.classList.toggle('is-stuck', window.scrollY > 8);
@@ -51,27 +180,9 @@
     if (window.innerWidth > 760) toggleMenu(false);
   });
 
-  var revealables = document.querySelectorAll(
-    '.card, .dept, .prod, .info, .contato__form, .logo-box, .photo-box, .hero__stats'
-  );
-  revealables.forEach(function (el) { el.classList.add('reveal'); });
-
-  if ('IntersectionObserver' in window) {
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          io.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px' });
-    revealables.forEach(function (el) { io.observe(el); });
-  } else {
-    revealables.forEach(function (el) { el.classList.add('is-visible'); });
-  }
-
   var form = document.getElementById('contatoForm');
   var status = document.getElementById('formStatus');
+  var numero = D.contato && D.contato.whatsapp ? D.contato.whatsapp : '';
 
   form.addEventListener('submit', function (e) {
     e.preventDefault();
@@ -95,10 +206,11 @@
 
     var f = new FormData(form);
     var texto = encodeURIComponent(
-      'Olá, Mercado Rocha! Meu nome é ' + f.get('nome') + ' (' + f.get('assunto') + ').\n' +
-      'Telefone: ' + f.get('tel') + '\nE-mail: ' + f.get('email') + '\n\n' + f.get('msg')
+      'Olá, ' + (D.nome || 'Mercado Rocha') + '! Meu nome é ' + f.get('nome') +
+      ' (' + f.get('assunto') + ').\nTelefone: ' + f.get('tel') +
+      '\nE-mail: ' + f.get('email') + '\n\n' + f.get('msg')
     );
-    window.open('https://wa.me/551140028922?text=' + texto, '_blank');
+    window.open('https://wa.me/' + numero + '?text=' + texto, '_blank');
 
     status.textContent = 'Tudo certo! Abrimos o WhatsApp para você enviar.';
     form.reset();
@@ -108,4 +220,29 @@
     var field = e.target.closest('.field');
     if (field) field.classList.remove('has-error');
   });
+
+  /* =========================================================
+     5. Animacao na rolagem
+     ========================================================= */
+
+  var revealables = document.querySelectorAll(
+    '.card, .dept, .prod, .info, .contato__form, .logo-box, .photo-box, .hero__stats'
+  );
+
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px' });
+    revealables.forEach(function (el) {
+      el.classList.add('reveal');
+      io.observe(el);
+    });
+  } else {
+    revealables.forEach(function (el) { el.classList.add('reveal', 'is-visible'); });
+  }
 })();
