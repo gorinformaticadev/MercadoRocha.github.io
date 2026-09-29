@@ -13,6 +13,15 @@
     }, D);
   }
 
+  /* Cache-busting: anexa ?v=<versao> a URLs de imagem.
+     A versao vem de D.imagens.versao (padrão 1). */
+  function comVersao(url) {
+    if (!url) return url;
+    var versao = (D.imagens && D.imagens.versao) || 1;
+    var sep = url.indexOf('?') === -1 ? '?' : '&';
+    return url + sep + 'v=' + versao;
+  }
+
   function textoSeguro(valor) {
     return String(valor)
       .replace(/&/g, '&amp;')
@@ -72,7 +81,7 @@
 
   Array.prototype.forEach.call(document.querySelectorAll('[data-cfg-src]'), function (el) {
     var v = valorDe(el.getAttribute('data-cfg-src'));
-    if (v) el.setAttribute('src', v);
+    if (v) el.setAttribute('src', comVersao(v));
   });
 
   Array.prototype.forEach.call(document.querySelectorAll('[data-cfg-alt]'), function (el) {
@@ -146,7 +155,7 @@
       img.alt = oferta.nome || 'Oferta';
       img.width = 600;
       img.height = 600;
-      if (oferta.imagem) img.src = oferta.imagem;
+      if (oferta.imagem) img.src = comVersao(oferta.imagem);
 
       if (oferta.link) {
         var a = document.createElement('a');

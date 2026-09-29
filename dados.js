@@ -122,7 +122,12 @@ var MERCADO = {
     fachada: 'images/fachada.jpg',
 
     // Icone da aba do navegador
-    favicon: 'images/favicon.png'
+    favicon: 'images/favicon.png',
+
+    // CACHE-BUSTING: incremente este numero (ex.: 1, 2, 3...)
+    // sempre que trocar alguma imagem no Drive/Dropbox.
+    // O script anexa ?v=X a TODAS as URLs de imagem.
+    versao: 1
   },
 
   /* ---------- Ofertas da semana ----------
@@ -143,31 +148,139 @@ var MERCADO = {
        link    -> opcional. Para onde o clique leva (a post do
                   Instagram, o WhatsApp, a pagina do produto...).
 
-     Formato recomendado: imagem QUADRADA (1:1), 1000x1000 px.       */
+     Formato recomendado: imagem QUADRADA (1:1), 1000x1000 px.
+
+     ===================================================================
+     TUTORIAL: COMO USAR IMAGENS DO GOOGLE DRIVE NAS OFERTAS
+     ===================================================================
+
+     1. SUBIR A IMAGEM NO DRIVE
+        - Acesse drive.google.com e faca login
+        - Clique em "Novo" > "Upload de arquivo" e selecione a imagem
+        - Dica: use imagem quadrada (1000x1000px), PNG ou JPG
+
+     2. COMPARTILHAR COM LINK PUBLICO (OBRIGATORIO)
+        - Clique com o botao direito no arquivo > "Compartilhar"
+        - Em "Acesso geral", clique em "Restrito" e mude para
+          "Qualquer pessoa com o link"
+        - Confirme em "Concluido"
+
+     3. PEGAR O ID DO ARQUIVO
+        - Com o arquivo selecionado, olhe a URL na barra do navegador:
+          https://drive.google.com/file/d/1AbCdEfGhIjKlMnOpQrStUvWxYz/view
+        - O ID e o trecho entre /d/ e /view:
+          1AbCdEfGhIjKlMnOpQrStUvWxYz
+
+     4. MONTAR A URL PARA O SITE
+        Use este modelo (copie e cole no campo "imagem" do ofertas):
+        https://drive.google.com/thumbnail?id=COLE_O_ID_AQUI&sz=w800
+
+        Exemplo real:
+        https://drive.google.com/thumbnail?id=1AbCdEfGhIjKlMnOpQrStUvWxYz&sz=w800
+
+        Parametros:
+          - id=...       -> ID do arquivo (obrigatorio)
+          - sz=w800      -> largura maxima em pixels (800, 1000, 1200...)
+            Use w800 para ofertas (economiza banda). Para foto grande,
+            use w1200 ou w1600.
+
+     5. COLOCAR NO dados.js
+        Edite o campo "imagem" da oferta correspondente:
+        {
+          imagem: 'https://drive.google.com/thumbnail?id=1AbCdEfGhIjKlMnOpQrStUvWxYz&sz=w800',
+          nome: 'Descricao para leitor de tela (ex.: Banana prata R$ 5,99/kg)',
+          link: 'https://wa.me/556134599937?text=Quero%20banana'
+        },
+
+     6. ATUALIZAR A VERSAO (CACHE-BUSTING)
+        - No topo do bloco "imagens", incremente o numero "versao":
+          versao: 2   (era 1, virou 2)
+        - Isso força o navegador a baixar a nova imagem, ignorando o cache.
+
+     7. TESTAR
+        - Abra o site (Ctrl+F5 para forcar recarga)
+        - A imagem deve aparecer no card da oferta
+
+     ===================================================================
+     PROBLEMAS COMUNS E SOLUCOES
+     ===================================================================
+
+     - Imagem nao aparece (icone quebrado):
+        * Verifique se o compartilhamento esta "Qualquer pessoa com o link"
+        * Confira se o ID esta correto (sem espacos, completo)
+        * Teste a URL direta no navegador: deve abrir a imagem
+
+     - Imagem antiga continua aparecendo:
+        * Voce esqueceu de incrementar "imagens.versao" no dados.js
+        * Force recarga: Ctrl+Shift+R (Windows) / Cmd+Shift+R (Mac)
+
+     - Erro 403 / "Quota exceeded":
+        * O Drive limita acessos simultaneos. Aguarde alguns minutos.
+        * Para producao, hospede as imagens no proprio servidor ou CDN
+          (Cloudflare, Netlify, Vercel, AWS S3 + CloudFront).
+
+     - Imagem cortada ou esticada:
+        * Use imagem quadrada (1:1). O site faz crop central automatico.
+        * Tamanho ideal: 1000x1000px (peso ate ~200KB em JPG/PNG otimizado).
+
+     =================================================================== */
   ofertas: [
     {
       imagem: 'images/ofertas/promo1.png',
-      nome: 'Oferta: banana prata, quilo por R$ 5,99'
+      nome: ''
     },
     {
-      imagem: 'images/ofertas/picanha.png',
-      nome: 'Oferta: picanha, quilo por R$ 73,90'
-    },
-    {
-      imagem: 'images/ofertas/leite.png',
-      nome: 'Oferta: leite integral, 1 litro por R$ 4,54'
-    },
-    {
-      imagem: 'images/ofertas/pao.png',
-      nome: 'Oferta: pão francês, 500 g por R$ 6,24'
-    },
-    {
-      imagem: 'images/ofertas/ovos.png',
-      nome: 'Oferta: ovos, cartela com 30 unidades por R$ 21,16'
-    },
-    {
-      imagem: 'images/ofertas/laranja.png',
-      nome: 'Oferta: laranja pera, quilo por R$ 3,29'
+      imagem: 'images/ofertas/promo2.png',
+      nome: ''
     }
+    ,
+    {
+      imagem: 'images/ofertas/promo3.png',
+      nome: ''
+    }
+    ,
+    {
+      imagem: 'images/ofertas/promo4.png',
+      nome: ''
+    }
+    ,
+    {
+      imagem: 'images/ofertas/promo5.png',
+      nome: ''
+    }
+    ,
+    {
+      imagem: 'images/ofertas/promo6.png',
+      nome: ''
+    }
+    ,
+    {
+      imagem: 'images/ofertas/promo7.png',
+      nome: ''
+    }
+    ,
+    {
+      imagem: 'images/ofertas/promo8.png',
+      nome: ''
+    }      ,
+      {
+        imagem: 'images/ofertas/promo9.png',
+        nome: ''
+      }
+      ,
+      {
+        imagem: 'images/ofertas/promo10.png',
+        nome: ''
+      }
+      ,
+      {
+        imagem: 'images/ofertas/promo11.png',
+        nome: ''
+      }
+      ,
+      {
+        imagem: 'images/ofertas/promo12.png',
+        nome: ''
+      }
   ]
 };
